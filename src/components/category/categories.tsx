@@ -9,8 +9,8 @@ import { For, Show } from "solid-js"
 
 export const Categories = () => {
   const navigate = useNavigate()
-  const { fetchCategories } = useFetch()
-  const query = createQuery(() => ["categories"], fetchCategories)
+  const { fetchCategories, categoriesQueryKey } = useFetch()
+  const query = createQuery(() => categoriesQueryKey, fetchCategories)
 
   return (
     <div class={clsx("flex", "flex-col", "justify-center", "items-center", "gap-2")}>

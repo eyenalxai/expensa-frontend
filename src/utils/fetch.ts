@@ -85,9 +85,11 @@ export const useFetch = () => {
       { withCredentials: true }
     )
 
+  const profileQueryKey = ["profile"]
   const fetchProfile = () =>
     fetcher<User>("/me", "GET", accessToken() as string, setAccessToken)
 
+  const categoriesQueryKey = ["categories"]
   const fetchCategories = () =>
     fetcher<Category[]>("/category", "GET", accessToken() as string, setAccessToken)
 
@@ -108,5 +110,13 @@ export const useFetch = () => {
       JSON.stringify({ categoryName })
     )
 
-  return { auth, fetchProfile, fetchCategories, addCategory, deleteCategory }
+  return {
+    auth,
+    fetchProfile,
+    profileQueryKey,
+    fetchCategories,
+    categoriesQueryKey,
+    addCategory,
+    deleteCategory
+  }
 }

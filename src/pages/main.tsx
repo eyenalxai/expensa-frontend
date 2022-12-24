@@ -2,12 +2,17 @@ import { Logout } from "@components/logout"
 import { Outlet } from "@solidjs/router"
 import { createQuery } from "@tanstack/solid-query"
 import { useFetch } from "@utils/fetch"
+import { queryClient } from "@utils/query"
 import clsx from "clsx"
 import { Show } from "solid-js"
 
 export const Main = () => {
-  const { fetchProfile } = useFetch()
-  const query = createQuery(() => ["profile"], fetchProfile)
+  const { fetchProfile, profileQueryKey, categoriesQueryKey } = useFetch()
+  const query = createQuery(() => profileQueryKey, fetchProfile, {
+    onSuccess: () => {
+      queryClient.prefetchQuery(categoriesQueryKey)
+    }
+  })
 
   return (
     <div class={clsx("flex", "mt-12", "justify-center")}>
@@ -20,7 +25,6 @@ export const Main = () => {
               </h2>
               <Logout />
             </div>
-
             <Outlet />
           </div>
         )}
