@@ -9,6 +9,7 @@ import { Show } from "solid-js"
 export const Main = () => {
   const { fetchProfile, profileQueryKey, fetchCategories, categoriesQueryKey } =
     useFetch()
+
   const query = createQuery(() => profileQueryKey, fetchProfile, {
     onSuccess: () => {
       queryClient.prefetchQuery({
