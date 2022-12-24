@@ -7,10 +7,14 @@ import clsx from "clsx"
 import { Show } from "solid-js"
 
 export const Main = () => {
-  const { fetchProfile, profileQueryKey, categoriesQueryKey } = useFetch()
+  const { fetchProfile, profileQueryKey, fetchCategories, categoriesQueryKey } =
+    useFetch()
   const query = createQuery(() => profileQueryKey, fetchProfile, {
     onSuccess: () => {
-      queryClient.prefetchQuery(categoriesQueryKey)
+      queryClient.prefetchQuery({
+        queryKey: categoriesQueryKey,
+        queryFn: fetchCategories
+      })
     }
   })
 
