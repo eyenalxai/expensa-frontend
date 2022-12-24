@@ -86,10 +86,10 @@ export const useFetch = () => {
     )
 
   const fetchProfile = () =>
-    fetcher<User>("/me/", "GET", accessToken() as string, setAccessToken)
+    fetcher<User>("/me", "GET", accessToken() as string, setAccessToken)
 
   const fetchCategories = () =>
-    fetcher<Category[]>("/category/", "GET", accessToken() as string, setAccessToken)
+    fetcher<Category[]>("/category", "GET", accessToken() as string, setAccessToken)
 
   const deleteCategory = (id: number) =>
     fetcher(
@@ -101,7 +101,7 @@ export const useFetch = () => {
 
   const addCategory = (categoryName: string) =>
     fetcher<never>(
-      "/category/",
+      "/category",
       "POST",
       accessToken() as string,
       setAccessToken,

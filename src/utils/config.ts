@@ -6,9 +6,6 @@ export const createConfig = () => {
     ? `https://${backendDomain}`
     : `http://${backendDomain}`
 
-  console.log("is prod", import.meta.env.PROD)
-  console.log("backend url", backendUrl)
-
   const axiosInstance = axios.create()
   axiosInstance.defaults.baseURL = backendUrl
 
