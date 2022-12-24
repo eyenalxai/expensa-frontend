@@ -1,4 +1,4 @@
 export type User = {
-  user_id: number
+  userId: number
   username: string
 }

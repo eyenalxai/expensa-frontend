@@ -1,7 +1,21 @@
 /* @refresh reload */
-import "./index.css"
+import { AuthProvider } from "@components/auth-provider"
+import { Router } from "@solidjs/router"
+import { QueryClientProvider } from "@tanstack/solid-query"
+import { queryClient } from "@utils/query"
 import { render } from "solid-js/web"
 import { App } from "./App"
-import { QueryClient, QueryClientProvider } from "@tanstack/solid-query"
+import "./index.css"
 
-render(() => <App />, document.getElementById("root") as HTMLElement)
+render(
+  () => (
+    <AuthProvider>
+      <Router>
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+      </Router>
+    </AuthProvider>
+  ),
+  document.getElementById("root") as HTMLElement
+)
