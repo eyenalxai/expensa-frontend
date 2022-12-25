@@ -28,9 +28,10 @@ export const CategoryButton = (props: CategoryButtonProps) => {
         "justify-center",
         "items-center",
         "flex-row",
-        "w-36",
-        "px-2",
-        "py-1",
+        "w-48",
+        "px-1.5",
+        "py-1.5",
+        "pl-3",
         "border-style",
         "rounded-md",
         "truncate"
