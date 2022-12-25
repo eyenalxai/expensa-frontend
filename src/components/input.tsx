@@ -7,7 +7,7 @@ type InputProps = JSX.InputHTMLAttributes<HTMLInputElement> & {
 }
 export const Input = (props: InputProps) => {
   return (
-    <div class={clsx("flex", "flex-col", "gap-1")}>
+    <div class={clsx("flex", "flex-col", "gap-0.5")}>
       <label class={clsx("text-slate-500", "text-xs", "ml-1")} for={props.id}>
         {props.label}
       </label>

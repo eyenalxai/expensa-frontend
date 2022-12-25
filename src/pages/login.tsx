@@ -59,7 +59,7 @@ export const Login = () => {
         }}
       >
         <Input
-          class={clsx("input-height")}
+          class={clsx("input-height", "w-48")}
           id="username"
           label="username"
           type="text"
@@ -69,15 +69,17 @@ export const Login = () => {
           id="password"
           label="password"
           type="password"
-          class={clsx("input-height", "tracking-widest")}
+          class={clsx("input-height", "tracking-widest", "w-48")}
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
-        <Button class={clsx("w-16", "button-height")} type={"submit"}>
-          {isLoggingIn() && error() === undefined ? <Spinner /> : "login"}
-        </Button>
-        <Show when={error()} keyed={true}>
-          {(error) => <Error text={error} />}
-        </Show>
+        <div class={clsx("mt-4", "flex", "flex-col", "gap-4", "items-center")}>
+          <Button class={clsx("w-16", "button-height")} type={"submit"}>
+            {isLoggingIn() && error() === undefined ? <Spinner /> : "login"}
+          </Button>
+          <Show when={error()} keyed={true}>
+            {(error) => <Error text={error} />}
+          </Show>
+        </div>
       </form>
     </div>
   )
