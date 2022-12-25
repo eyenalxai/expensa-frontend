@@ -7,9 +7,8 @@
         @apply bg-slate-100 dark:bg-slate-800;
     }
 
-
     body {
-        @apply font-mono bg-style;
+        @apply font-mono bg-style touch-none;
     }
 }
 
