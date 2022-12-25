@@ -1,19 +1,24 @@
 import { Button } from "@components/button"
 import { Category } from "@custom-types/category"
+import { Spinner } from "@pages/login"
 import { createMutation } from "@tanstack/solid-query"
 import { useFetch } from "@utils/fetch"
 import { queryClient } from "@utils/query"
 import clsx from "clsx"
+import { createSignal } from "solid-js"
 
 type CategoryButtonProps = {
   category: Category
 }
 
 export const CategoryButton = (props: CategoryButtonProps) => {
-  const { deleteCategory } = useFetch()
+  const { deleteCategory, categoriesQueryKey } = useFetch()
+  const [isDeletingCategory, setIsDeletingCategory] = createSignal(false)
 
   const query = createMutation(deleteCategory, {
-    onSuccess: () => queryClient.invalidateQueries(["categories"], { exact: true })
+    onSuccess: () => queryClient.invalidateQueries(categoriesQueryKey, { exact: true }),
+    onMutate: () => setIsDeletingCategory(true),
+    onSettled: () => setIsDeletingCategory(false)
   })
 
   return (
@@ -37,9 +42,9 @@ export const CategoryButton = (props: CategoryButtonProps) => {
       <div class={clsx("grow")} />
       <Button
         onClick={() => query.mutate(props.category.categoryId)}
-        class={clsx("text-xs", "py-1", "px-2")}
+        class={clsx("text-xs", "button-height-sm", "w-12")}
       >
-        del
+        {isDeletingCategory() ? <Spinner /> : "del"}
       </Button>
     </div>
   )

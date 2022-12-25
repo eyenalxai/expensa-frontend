@@ -1,4 +1,4 @@
-import { AuthContext, AuthContextProps } from "@utils/auth/context"
+import { AuthContext, AuthContextProps } from "@utils/auth-context"
 import { createSignal, JSX } from "solid-js"
 
 type AuthContextProviderProps = {

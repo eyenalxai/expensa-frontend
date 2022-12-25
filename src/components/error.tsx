@@ -10,10 +10,13 @@ export const Error = (props: ErrorProps) => {
       <div
         class={clsx(
           "text-red-400",
+          "dark:text-red-500",
           "w-fit",
           "max-w-[10rem]",
           "text-center",
-          "bg-red-100",
+          "border",
+          "border-red-200",
+          "dark:border-red-700",
           "rounded",
           "px-2",
           "py-1",

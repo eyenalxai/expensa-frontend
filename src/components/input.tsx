@@ -16,15 +16,13 @@ export const Input = (props: InputProps) => {
         name={props.id}
         autocomplete="on"
         class={clsx(
-          "w-48",
           "transition-style",
           "ring-style",
           "rounded-md",
           "bg-slate-200",
           "dark:bg-slate-700",
           "text-color-style",
-          "px-4",
-          "py-1",
+          "px-2",
           props.class
         )}
         type={props.type}

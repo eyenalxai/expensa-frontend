@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "@solidjs/router"
-import { useAuth } from "@utils/auth/context"
+import { useAuth } from "@utils/auth-context"
 import { Show } from "solid-js"
 
 export const ProtectedRoute = () => {

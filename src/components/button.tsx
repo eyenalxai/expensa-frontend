@@ -6,6 +6,7 @@ type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement>
 export const Button = (props: ButtonProps) => {
   return (
     <button
+      disabled={props.disabled}
       onClick={props.onClick}
       type={props.type}
       class={clsx(
@@ -15,6 +16,7 @@ export const Button = (props: ButtonProps) => {
         "bg-slate-200",
         "dark:bg-slate-700",
         "text-color-style",
+        "px-2",
         props.class
       )}
     >

@@ -14,6 +14,18 @@
 }
 
 @layer components {
+    .button-height {
+        @apply h-8;
+    }
+
+    .button-height-sm {
+        @apply h-6;
+    }
+
+    .input-height {
+        @apply button-height;
+    }
+
     .border-style {
         @apply border border-slate-300 dark:border-slate-700;
     }
@@ -22,19 +34,26 @@
         @apply text-slate-700 dark:text-slate-300;
     }
 
+    .fill-color-style {
+        @apply fill-slate-600 dark:fill-slate-400;
+    }
+
     .transition-style {
         @apply transition-all duration-300 ease-in-out;
     }
 
     .ring-style {
         @apply
+        disabled:border-red-300 disabled:dark:border-red-600
+        disabled:hover:ring-0 disabled:hover:ring-offset-0
+
         outline-none
 
         border-[0.05rem]
-        border-slate-300 dark:border-slate-800
+        border-slate-300 dark:border-slate-600
 
-        hover:border-slate-300 dark:hover:border-slate-800
-        focus:border-slate-300 dark:focus:border-slate-800
+        hover:border-slate-300 dark:hover:border-slate-600
+        focus:border-slate-300 dark:focus:border-slate-600
 
         ring-0
         ring-offset-0

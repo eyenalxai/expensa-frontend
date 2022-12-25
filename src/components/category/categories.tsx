@@ -14,7 +14,7 @@ export const Categories = () => {
 
   return (
     <div class={clsx("flex", "flex-col", "justify-center", "items-center", "gap-2")}>
-      <Button onClick={() => navigate("/")} class={clsx("py-1", "px-2")}>
+      <Button onClick={() => navigate("/")} class={clsx("button-height", "px-2")}>
         back
       </Button>
       <AddCategory />

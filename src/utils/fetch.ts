@@ -1,7 +1,7 @@
 import { Category } from "@custom-types/category"
 import { AccessToken } from "@custom-types/token"
 import { User } from "@custom-types/user"
-import { useAuth } from "@utils/auth/context"
+import { useAuth } from "@utils/auth-context"
 import { createConfig } from "@utils/config"
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios"
 
@@ -75,9 +75,9 @@ export const useFetch = () => {
   const { axiosInstance } = createConfig()
   const { accessToken, setAccessToken } = useAuth()
 
-  const auth = (username: string, password: string) =>
+  const login = (username: string, password: string) =>
     axiosInstance.post(
-      "/auth",
+      "/login",
       {
         username,
         password
@@ -86,10 +86,12 @@ export const useFetch = () => {
     )
 
   const profileQueryKey = ["profile"]
+
   const fetchProfile = () =>
     fetcher<User>("/me", "GET", accessToken() as string, setAccessToken)
 
   const categoriesQueryKey = ["categories"]
+
   const fetchCategories = () =>
     fetcher<Category[]>("/category", "GET", accessToken() as string, setAccessToken)
 
@@ -111,7 +113,7 @@ export const useFetch = () => {
     )
 
   return {
-    auth,
+    auth: login,
     fetchProfile,
     profileQueryKey,
     fetchCategories,

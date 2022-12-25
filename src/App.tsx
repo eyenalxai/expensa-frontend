@@ -5,7 +5,7 @@ import { AccessToken } from "@custom-types/token"
 import { Login } from "@pages/login"
 import { Main } from "@pages/main"
 import { Navigate, Route, Routes } from "@solidjs/router"
-import { useAuth } from "@utils/auth/context"
+import { useAuth } from "@utils/auth-context"
 import { createConfig } from "@utils/config"
 import { AxiosResponse } from "axios"
 import { createEffect, createSignal, Match, Switch } from "solid-js"
@@ -17,7 +17,7 @@ export const App = () => {
 
   createEffect(() => {
     axiosInstance
-      .post("/refresh", {}, { withCredentials: true })
+      .post("/refresh_tokens", {}, { withCredentials: true })
       .then((res: AxiosResponse<AccessToken>) => {
         if (res.status === 200) {
           setAccessToken(res.data.accessToken)
