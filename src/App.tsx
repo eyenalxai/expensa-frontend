@@ -1,17 +1,16 @@
-import { BackButton } from "@components/back-button"
 import { Categories } from "@components/category/categories"
-import { ProtectedRoute } from "@components/protected-route"
+import { Expenses } from "@components/expense/expenses"
+import { ProtectedRoute } from "@components/protected/protected-route"
+import { axiosInstance } from "@config/axios"
 import { AccessToken } from "@custom-types/token"
 import { Login } from "@pages/login"
 import { Main } from "@pages/main"
 import { Navigate, Route, Routes } from "@solidjs/router"
 import { useAuth } from "@utils/auth-context"
-import { createConfig } from "@utils/config"
 import { AxiosResponse } from "axios"
 import { createEffect, createSignal, Match, Switch } from "solid-js"
 
 export const App = () => {
-  const { axiosInstance } = createConfig()
   const { accessToken, setAccessToken } = useAuth()
   const [isCheckingAuth, setIsCheckingAuth] = createSignal(true)
 
@@ -37,14 +36,14 @@ export const App = () => {
         <Routes>
           <Route path="" component={ProtectedRoute}>
             <Route path="/" component={Main}>
-              <Route path="" component={BackButton} />
-              <Route path={"categories"} component={Categories} />
-              <Route path="*" element={<Navigate href={"/"} />} />
+              <Route path="expenses" component={Expenses} />
+              <Route path="categories" component={Categories} />
+              <Route path="*" element={<Navigate href={"/expenses"} />} />
             </Route>
           </Route>
           <Route
             path="/login"
-            element={accessToken() ? <Navigate href={"/"} /> : <Login />}
+            element={accessToken() ? <Navigate href={"/expenses"} /> : <Login />}
           />
         </Routes>
       </Match>

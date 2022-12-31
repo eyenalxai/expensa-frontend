@@ -10,6 +10,14 @@
     body {
         @apply font-mono bg-style touch-none;
     }
+
+    input[type='number']::-webkit-outer-spin-button,
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number'] {
+        -webkit-appearance: none;
+        margin: 0;
+        -moz-appearance: textfield !important;
+    }
 }
 
 @layer components {
@@ -34,7 +42,7 @@
     }
 
     .fill-color-style {
-        @apply fill-slate-600 dark:fill-slate-400;
+        @apply fill-slate-800 dark:fill-slate-200;
     }
 
     .transition-style {

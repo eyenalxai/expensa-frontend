@@ -1,9 +1,9 @@
 import { Button } from "@components/button"
+import { Spinner } from "@components/spinner"
+import { queryClient } from "@config/solid-query"
 import { Category } from "@custom-types/category"
-import { Spinner } from "@pages/login"
 import { createMutation } from "@tanstack/solid-query"
-import { useFetch } from "@utils/fetch"
-import { queryClient } from "@utils/query"
+import { createFetch } from "@utils/fetch"
 import clsx from "clsx"
 import { createSignal } from "solid-js"
 
@@ -12,13 +12,13 @@ type CategoryButtonProps = {
 }
 
 export const CategoryButton = (props: CategoryButtonProps) => {
-  const { deleteCategory, categoriesQueryKey } = useFetch()
-  const [isDeletingCategory, setIsDeletingCategory] = createSignal(false)
+  const { disableCategory, categoriesQueryKey } = createFetch()
+  const [isDisablingCategory, setIsDisablingCategory] = createSignal(false)
 
-  const query = createMutation(deleteCategory, {
+  const query = createMutation(disableCategory, {
     onSuccess: () => queryClient.invalidateQueries(categoriesQueryKey, { exact: true }),
-    onMutate: () => setIsDeletingCategory(true),
-    onSettled: () => setIsDeletingCategory(false)
+    onMutate: () => setIsDisablingCategory(true),
+    onSettled: () => setIsDisablingCategory(false)
   })
 
   return (
@@ -45,7 +45,7 @@ export const CategoryButton = (props: CategoryButtonProps) => {
         onClick={() => query.mutate(props.category.categoryId)}
         class={clsx("text-xs", "button-height-sm", "w-12")}
       >
-        {isDeletingCategory() ? <Spinner /> : "del"}
+        {isDisablingCategory() ? <Spinner /> : "del"}
       </Button>
     </div>
   )

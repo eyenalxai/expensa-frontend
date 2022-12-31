@@ -12,6 +12,7 @@ export const Input = (props: InputProps) => {
         {props.label}
       </label>
       <input
+        value={props.value}
         id={props.id}
         name={props.id}
         autocomplete="on"

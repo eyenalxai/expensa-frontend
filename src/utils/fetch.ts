@@ -1,8 +1,9 @@
+import { axiosInstance } from "@config/axios"
 import { Category } from "@custom-types/category"
+import { Expense } from "@custom-types/expense"
 import { AccessToken } from "@custom-types/token"
 import { User } from "@custom-types/user"
 import { useAuth } from "@utils/auth-context"
-import { createConfig } from "@utils/config"
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios"
 
 export function fetcher<T>(
@@ -12,8 +13,6 @@ export function fetcher<T>(
   setAccessToken: (accessToken: string | null) => void,
   body: BodyInit | null | undefined = null
 ): Promise<T> {
-  const { axiosInstance } = createConfig()
-
   const requestOptions: AxiosRequestConfig = {
     method,
     data: body,
@@ -71,8 +70,7 @@ export function fetcher<T>(
     })
 }
 
-export const useFetch = () => {
-  const { axiosInstance } = createConfig()
+export const createFetch = () => {
   const { accessToken, setAccessToken } = useAuth()
 
   const login = (username: string, password: string) =>
@@ -95,10 +93,10 @@ export const useFetch = () => {
   const fetchCategories = () =>
     fetcher<Category[]>("/category", "GET", accessToken() as string, setAccessToken)
 
-  const deleteCategory = (id: number) =>
+  const disableCategory = (id: number) =>
     fetcher(
       `/category/${id.toString()}`,
-      "DELETE",
+      "PATCH",
       accessToken() as string,
       setAccessToken
     )
@@ -112,13 +110,29 @@ export const useFetch = () => {
       JSON.stringify({ categoryName })
     )
 
+  const expensesQueryKey = ["expenses"]
+
+  const fetchExpenses = () =>
+    fetcher<Expense[]>("/expense", "GET", accessToken() as string, setAccessToken)
+
+  const addExpense = (expenseAmount: number, categoryId: number) =>
+    fetcher<never>(
+      "/expense",
+      "POST",
+      accessToken() as string,
+      setAccessToken,
+      JSON.stringify({ expenseAmount, categoryId })
+    )
   return {
-    auth: login,
-    fetchProfile,
+    login,
     profileQueryKey,
-    fetchCategories,
+    fetchProfile,
     categoriesQueryKey,
+    fetchCategories,
     addCategory,
-    deleteCategory
+    disableCategory,
+    expensesQueryKey,
+    fetchExpenses,
+    addExpense
   }
 }

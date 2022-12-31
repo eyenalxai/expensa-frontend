@@ -1,12 +1,11 @@
 import { Button } from "@components/button"
-import { Spinner } from "@pages/login"
+import { Spinner } from "@components/spinner"
+import { axiosInstance } from "@config/axios"
 import { useAuth } from "@utils/auth-context"
-import { createConfig } from "@utils/config"
 import clsx from "clsx"
 import { createSignal } from "solid-js"
 
-export const Logout = () => {
-  const { axiosInstance } = createConfig()
+const createLogout = () => {
   const { setAccessToken } = useAuth()
   const [isLoggingOut, setIsLoggingOut] = createSignal(false)
 
@@ -17,6 +16,15 @@ export const Logout = () => {
       setIsLoggingOut(false)
     })
   }
+
+  return {
+    isLoggingOut,
+    logout
+  }
+}
+
+export const Logout = () => {
+  const { isLoggingOut, logout } = createLogout()
 
   return (
     <Button
