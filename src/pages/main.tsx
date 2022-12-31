@@ -1,29 +1,9 @@
+import { Loading } from "@components/loading"
 import { Logout } from "@components/logout"
-import { Spinner } from "@components/spinner"
-import { queryClient } from "@config/solid-query"
 import { Outlet } from "@solidjs/router"
-import { createQuery } from "@tanstack/solid-query"
-import { createFetch } from "@utils/fetch"
+import { createProfileQuery } from "@utils/query/profile"
 import clsx from "clsx"
 import { Show } from "solid-js"
-
-const createProfileQuery = () => {
-  const { fetchProfile, profileQueryKey, fetchCategories, categoriesQueryKey } =
-    createFetch()
-
-  const query = createQuery(() => profileQueryKey, fetchProfile, {
-    onSuccess: () => {
-      queryClient.prefetchQuery({
-        queryKey: categoriesQueryKey,
-        queryFn: fetchCategories
-      })
-    }
-  })
-
-  return {
-    query
-  }
-}
 
 export const Main = () => {
   const { query } = createProfileQuery()
@@ -32,17 +12,18 @@ export const Main = () => {
     <div class={clsx("flex", "mt-12", "justify-center")}>
       <div class={clsx("flex", "flex-col", "gap-3", "items-center")}>
         <div class={clsx("flex", "flex-row", "gap-3", "items-center")}>
-          <div class={"h-6"}>
+          <div class={clsx("h-6", "text-color-style")}>
             <Show
               when={query.isSuccess && query.data}
               keyed={true}
-              fallback={<Spinner />}
+              fallback={
+                <div class={clsx("flex", "gap-2")}>
+                  <h2>Hello,</h2>
+                  <Loading />
+                </div>
+              }
             >
-              {(user) => (
-                <h2 class={clsx("text-slate-700", "dark:text-slate-300")}>
-                  Hello, {user.username}
-                </h2>
-              )}
+              {(user) => <h2>Hello, {user.username}</h2>}
             </Show>
           </div>
           <Logout />

@@ -2,15 +2,13 @@ import { Button } from "@components/button"
 import { AddCategory } from "@components/category/add-category"
 import { CategoryButton } from "@components/category/category-button"
 import { useNavigate } from "@solidjs/router"
-import { createQuery } from "@tanstack/solid-query"
-import { createFetch } from "@utils/fetch"
+import { createCategoryQuery } from "@utils/query/category"
 import clsx from "clsx"
 import { For, Show } from "solid-js"
 
 export const Categories = () => {
   const navigate = useNavigate()
-  const { fetchCategories, categoriesQueryKey } = createFetch()
-  const query = createQuery(() => categoriesQueryKey, fetchCategories)
+  const { query } = createCategoryQuery()
 
   return (
     <div class={clsx("flex", "flex-col", "justify-center", "items-center", "gap-3")}>

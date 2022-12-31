@@ -1,5 +1,5 @@
 import { Button } from "@components/button"
-import { Spinner } from "@components/spinner"
+import { Loading } from "@components/loading"
 import { queryClient } from "@config/solid-query"
 import { Category } from "@custom-types/category"
 import { createMutation } from "@tanstack/solid-query"
@@ -45,7 +45,7 @@ export const CategoryButton = (props: CategoryButtonProps) => {
         onClick={() => query.mutate(props.category.categoryId)}
         class={clsx("text-xs", "button-height-sm", "w-12")}
       >
-        {isDisablingCategory() ? <Spinner /> : "del"}
+        {isDisablingCategory() ? <Loading /> : "del"}
       </Button>
     </div>
   )

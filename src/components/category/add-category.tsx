@@ -1,7 +1,7 @@
 import { Button } from "@components/button"
 import { Error } from "@components/error"
 import { Input } from "@components/input"
-import { Spinner } from "@components/spinner"
+import { Loading } from "@components/loading"
 import { createAddCategory } from "@utils/form/add-category-form"
 import clsx from "clsx"
 import { Show } from "solid-js"
@@ -30,7 +30,7 @@ export const AddCategory = () => {
           onChange={(e) => setCategoryName(e.currentTarget.value)}
         />
         <Button class={clsx("button-height", "w-12")} type={"submit"}>
-          {isAddingCategory() ? <Spinner /> : "add"}
+          {isAddingCategory() ? <Loading /> : "add"}
         </Button>
       </form>
       <Show when={error()} keyed={true}>

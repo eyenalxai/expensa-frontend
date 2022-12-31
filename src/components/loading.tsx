@@ -1,6 +1,6 @@
 import clsx from "clsx"
 
-export const Spinner = () => {
+export const Loading = () => {
   return (
     <div
       class={clsx(
@@ -8,6 +8,7 @@ export const Spinner = () => {
         "w-full",
         "fill-color-style",
         "flex",
+        "text-color-style",
         "justify-center",
         "py-1",
         "animate-bounce"

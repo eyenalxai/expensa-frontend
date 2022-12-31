@@ -1,14 +1,12 @@
 import { Button } from "@components/button"
 import { useNavigate } from "@solidjs/router"
-import { createQuery } from "@tanstack/solid-query"
-import { createFetch } from "@utils/fetch"
+import { createExpenseQuery } from "@utils/query/expense"
 import clsx from "clsx"
 import { Show } from "solid-js"
 
 export const Expenses = () => {
   const navigate = useNavigate()
-  const { expensesQueryKey, fetchExpenses } = createFetch()
-  const query = createQuery(() => expensesQueryKey, fetchExpenses)
+  const { query } = createExpenseQuery()
 
   return (
     <div class={clsx("flex", "flex-col", "items-center", "gap-3")}>

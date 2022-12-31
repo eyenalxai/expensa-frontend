@@ -1,7 +1,7 @@
 import { Button } from "@components/button"
 import { Error } from "@components/error"
 import { Input } from "@components/input"
-import { Spinner } from "@components/spinner"
+import { Loading } from "@components/loading"
 import { createLogin } from "@utils/form/login-form"
 import clsx from "clsx"
 import { Show } from "solid-js"
@@ -41,7 +41,7 @@ export const Login = () => {
         />
         <div class={clsx("mt-4", "flex", "flex-col", "gap-4", "items-center")}>
           <Button class={clsx("button-height", "px-2")} type={"submit"}>
-            {isLoggingIn() && error() === undefined ? <Spinner /> : "login"}
+            {isLoggingIn() && error() === undefined ? <Loading /> : "login"}
           </Button>
           <Show when={error()} keyed={true}>
             {(error) => <Error text={error} />}

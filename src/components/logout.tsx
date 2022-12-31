@@ -1,5 +1,5 @@
 import { Button } from "@components/button"
-import { Spinner } from "@components/spinner"
+import { Loading } from "@components/loading"
 import { axiosInstance } from "@config/axios"
 import { useAuth } from "@utils/auth-context"
 import clsx from "clsx"
@@ -32,7 +32,7 @@ export const Logout = () => {
       onClick={() => logout()}
       type={"button"}
     >
-      {isLoggingOut() ? <Spinner /> : "logout"}
+      {isLoggingOut() ? <Loading /> : "logout"}
     </Button>
   )
 }

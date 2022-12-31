@@ -4,7 +4,12 @@ import { Expense } from "@custom-types/expense"
 import { AccessToken } from "@custom-types/token"
 import { User } from "@custom-types/user"
 import { useAuth } from "@utils/auth-context"
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios"
+import {
+  AxiosError,
+  AxiosRequestConfig,
+  AxiosResponse,
+  RawAxiosRequestHeaders
+} from "axios"
 
 export function fetcher<T>(
   url: string,
@@ -44,7 +49,7 @@ export function fetcher<T>(
                 headers: {
                   ...requestOptions.headers,
                   Authorization: `Bearer ${accessToken}`
-                }
+                } as RawAxiosRequestHeaders
               })
                 .then((response: AxiosResponse<T>) => {
                   if (response.status === 200 || response.status === 201)
